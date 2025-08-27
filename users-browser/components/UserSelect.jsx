@@ -1,5 +1,5 @@
 "use client";
-export default function UserSelect({ user, onSelect, onFocusChange }) {
+export default function UserSelect({ user, onSelect }) {
     return (
         <select
             className="border p-2 rounded mb-4"
@@ -7,8 +7,7 @@ export default function UserSelect({ user, onSelect, onFocusChange }) {
                 const users = user.find((u) => u.id === Number(e.target.value));
                 onSelect(users);
             }}
-            onFocus={() => onFocusChange(true)}
-            onBlur={() => onFocusChange(false)}
+            
         >
             <option value="">Select a user</option>
             {user && user.map((u) => (
