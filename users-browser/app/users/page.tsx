@@ -1,10 +1,16 @@
-"use client";
-import { useEffect, useState } from "react";
-import UserSelect from "../../components/UserSelect";
-import UserTable from "../../components/UserTable";
 
+"use client";
+import { useRouter } from "next/navigation";
+import UserSelect from "../../components/UserSelect";
+
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  avatar: string;
+};
 export default function UsersPage() {
-  const usersList = [
+  const usersList:User[] = [
     {
       id: 1,
       name: "Leanne Graham",
@@ -36,32 +42,19 @@ export default function UsersPage() {
       avatar: 'https://avatar.iran.liara.run/public/22'
     },
   ];
-
-  const [users] = useState(usersList);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
-
-
-
-
-
-
-
-
+ const router = useRouter();
+  
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Users</h1>
-      <UserSelect user={users}
-        onSelect={setSelectedUser}
-        onFocusChange={setDropdownOpen}
-
+       <UserSelect
+        user={usersList}
+        onSelect={(selectedUser: { id: any; }) => {
+          if (selectedUser) {
+            router.push(`/users/${selectedUser.id}`);
+          }
+        }}
       />
-      {selectedUser && (
-        <div className={dropdownOpen ? "mt-42" : "mt-3"}>
-          <UserTable user={selectedUser} />
-        </div>
-      )}
 
     </div>
   );
