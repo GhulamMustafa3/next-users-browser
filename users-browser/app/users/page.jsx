@@ -38,7 +38,7 @@ export default function UsersPage() {
   ];
 
   const [users] = useState(usersList);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selected, setSelected] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
 
@@ -53,13 +53,13 @@ export default function UsersPage() {
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Users</h1>
       <UserSelect user={users}
-        onSelect={setSelectedUser}
+        onSelect={setSelected}
         onFocusChange={setDropdownOpen}
 
       />
       {selectedUser && (
         <div className={dropdownOpen ? "mt-42" : "mt-3"}>
-          <UserTable user={selectedUser} />
+          <UserTable user={selected} />
         </div>
       )}
 
